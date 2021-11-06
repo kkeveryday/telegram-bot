@@ -10,3 +10,73 @@
 Python – это универсальный современный язык программирования высокого уровня, к преимуществам которого относят высокую производительность программных решений и структурированный, хорошо читаемый код.  Синтаксис Питона максимально облегчен, что позволяет выучить его за сравнительно короткое время. Ядро имеет очень удобную структуру, а широкий перечень встроенных библиотек позволяет применять внушительный набор полезных функций и возможностей. ЯП может использоваться для написания прикладных приложений, а также разработки WEB-сервисов. Python может поддерживать широкий перечень стилей разработки приложений, в том числе, очень удобен для работы с ООП и функционального программирования. Питон активно развивается. Примерно раз в 2 года выходят обновления. Важной особенностью языка является отсутствие таких стандартов кодировки как ANSI, ISO и некоторых других, они работают благодаря интерпретатору.
 ### Общая характеристика PostgreSQL ###
 PostgreSQL — это популярная свободная объектно-реляционная система управления базами данных. PostgreSQL базируется на языке SQL и поддерживает многочисленные возможности. Преимущества PostgreSQL: поддержка БД неограниченного размера, мощные и надёжные механизмы транзакций и репликации, расширяемая система встроенных языков программирования и поддержка загрузки C-совместимых модулей, наследование, легкая расширяемость.
+## Работа с PostgreSQL ##
+### Создание таблицы schedule_group ###
+![image](https://user-images.githubusercontent.com/58790323/140606391-62d75317-6010-4595-b387-ab591b74223f.png)
+![image](https://user-images.githubusercontent.com/58790323/140606416-306a3471-bf6d-450c-85b9-89ecb00dfa90.png)
+### Создание таблицы schedule_people ###
+![image](https://user-images.githubusercontent.com/58790323/140606430-8d53c641-1ace-42ea-8ef7-ad379e170a21.png)
+![image](https://user-images.githubusercontent.com/58790323/140606432-b7dbfa5f-a5d6-48a8-bab5-e3d8cb383d8f.png)
+### Создание таблицы schedule_room ###
+![image](https://user-images.githubusercontent.com/58790323/140606443-1795a13a-2b57-4763-87b7-cfb79f34a6a5.png)
+![image](https://user-images.githubusercontent.com/58790323/140606448-2ac4b98c-2554-429c-853b-2486ed1e7863.png)
+### Создание таблицы regulations ###
+![image](https://user-images.githubusercontent.com/58790323/140606451-54c40174-eb43-4371-93b2-dd608c2e7fcc.png)
+![image](https://user-images.githubusercontent.com/58790323/140606453-9ed482ae-22e0-4c9e-b6e6-f84f01678a93.png)
+## Работа с Python и TelegramAPI ##
+### Импорт библиотек и подключение к БД ###
+Библиотека telebot для создания телеграм-бота, types для создания удобной интерактивной клавиатуры бота, time для того, чтобы делать паузу в 0.7 секунды между ответами бота, psycopg2 для подключения PostgreSQL к нашему проекту и defaultdict для оптимизации хэш-таблицы.
+
+![image](https://user-images.githubusercontent.com/58790323/140606506-02840307-0c76-4823-b89a-0c5403ff2afa.png)
+### Создание команд и функций Telegram-бота ###
+Написание кода для создания функций и команд, с помощью которых можно будет просматривать различные расписания или документы. Создаются 2 команды: start для начала работы бота и menu для получения главного меню. 4 функции для вывода определенных данных из БД (таблицы: schedule_group, schedule_ people, schedule_ room, regulations). Функция home, которая возвращает в главное меню. Также была реализована кнопочная клавиатура пользователя для того, чтобы облегчить работу с ботом.
+#### Команда /start ####
+![image](https://user-images.githubusercontent.com/58790323/140606536-2243e7a8-5e78-454e-8441-84c8968441be.png)
+#### Команда /menu ####
+![image](https://user-images.githubusercontent.com/58790323/140606573-d2487a37-524a-4804-9441-bcb8c57c4aa7.png)
+#### Функция для возврата в главное меню ####
+![image](https://user-images.githubusercontent.com/58790323/140606582-2ac14103-f7c2-47c6-b475-4f172953d438.png)
+#### Обработка и вывод расписания учебных групп ####
+![image](https://user-images.githubusercontent.com/58790323/140606592-c3ac797a-7a78-4e3f-a206-0243c76d6a5f.png)
+#### Обработка и вывод расписания аудиторий ####
+![image](https://user-images.githubusercontent.com/58790323/140606601-edcd78e4-2c6e-4c7f-bc48-ac738e16d6f4.png)
+#### Обработка и вывод расписания преподавателей ####
+![image](https://user-images.githubusercontent.com/58790323/140606615-4dc314b8-6e10-40d2-931d-86a3925774ad.png)
+#### Обработка и вывод нормативных документов ####
+![image](https://user-images.githubusercontent.com/58790323/140606621-3adf9fd3-4dcc-4363-b1b1-daeca88766ad.png)
+## Работа Telegram-бота ##
+Кнопка “Запустить” реализует команду start, которая выведет немного справочной информации и кнопку menu.
+#### Первый запуск ####
+![image](https://user-images.githubusercontent.com/58790323/140606663-ea38b08f-3137-4f21-8906-eeead99aa07f.png)
+#### Работа /start и кнопка /menu ####
+![image](https://user-images.githubusercontent.com/58790323/140606687-6adf889b-4f1c-4dda-87fa-84e8e95d1957.png)
+
+После нажатия на кнопку срабатывает команда menu, которая показывает главное меню пользователя, где он может выбрать то, что ему нужно (расписание аудиторий или другие таблицы).
+#### Главное меню бота ####
+![image](https://user-images.githubusercontent.com/58790323/140606708-ed6458c0-7b8b-443c-b751-8d386567c59a.png)
+#### Расписание группы ####
+![image](https://user-images.githubusercontent.com/58790323/140606727-b58f60d3-74d4-4794-9ddc-6a2ec6749f7b.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606733-2232b6c8-8501-4143-a0e8-1995304bd995.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606734-62963185-351b-4407-8f7c-022b90f14b43.png)
+#### Расписание аудитории ####
+![image](https://user-images.githubusercontent.com/58790323/140606757-3c916d63-06f9-4b9f-b619-48902c004fb0.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606760-9754039e-c0f1-4a6d-b1e0-5a5afa7cbfa5.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606766-5869ca89-28b1-4793-995a-51c26665240c.png)
+#### Расписание преподавателя ####
+![image](https://user-images.githubusercontent.com/58790323/140606778-b0ee639f-ced4-475c-9b6f-4b6ab40cc691.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606782-348927c6-7465-45f5-931e-a3dad03ef1d5.png)
+#### Нормативные документы университета ####
+![image](https://user-images.githubusercontent.com/58790323/140606795-30db83e0-4881-4dc2-a916-6f55a6575747.png)
+
+![image](https://user-images.githubusercontent.com/58790323/140606796-d95dc862-4376-48d2-aa0c-5ee7cac637a2.png)
+## Список использованных источников ##
+1. Работа с TelegramAPI в Python [сайт] URL: https://tlgrm.ru/docs/bots/samples#python
+2. Руководство по Python 3.xx версии [сайт] URL: https://metanit.com/python/tutorial/
+3. Руководство по PostgreSQL [сайт] URL: https://habr.com/ru/post/340460/
+4. Пример Telegram-бота на Python [сайт] URL: https://thecode.media/python-bot/
+5. Работа с PostgreSQL в Python [сайт] URL: https://habr.com/ru/post/317394/
